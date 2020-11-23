@@ -21,14 +21,14 @@ jobs:
           activate-conda: false
 
       - name: Set up GDS Env
-        shell: bash -l {0}
+        shell: bash
         run: |
           conda env create -f https://raw.githubusercontent.com/darribas/gds_env/master/gds_py/gds_py.yml
           conda activate gds
           pip install -r https://github.com/darribas/gds_env/raw/master/gds_py/gds_py_pip.txt
 
       - name: Check and Log Environment
-        shell: bash -l {0}
+        shell: bash
         run: |
           conda info
           # Print conda list
