@@ -10,16 +10,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        env:
-          - ""
-        yml:
-          - https://raw.githubusercontent.com/darribas/gds_env/master/gds_py/gds_py.yml
-        include:
-          - yml: https://raw.githubusercontent.com/darribas/gds_env/master/gds_py/gds_py.yml
-            os: windows-latest
-          - yml: https://raw.githubusercontent.com/darribas/gds_env/master/gds_py/gds_py.yml
-            os: macos-latest
+        os: [ubuntu-latest, windows-latest, macOS-latest]
 
     steps:
       - uses: actions/checkout@v2
