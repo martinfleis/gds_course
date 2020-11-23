@@ -2,10 +2,9 @@ name: Test GDS Course
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
-
   Test:
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -26,19 +25,15 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Setup Conda
-        uses: conda-incubator/setup-miniconda@v2
+        uses: s-weigand/setup-conda@v1
         with:
-            auto-update-conda: true
-            auto-activate-base: false
-            activate-environment: gds
-            environment-file: ${{ matrix.yml }}
+          activate-conda: false
 
       - name: Set up GDS Env
         shell: bash -l {0}
         run: |
-          conda update -y -n base -c defaults conda
-          conda list
-          conda env create -f ${{ matrix.yml }}
+          conda env create -f https://raw.githubusercontent.com/darribas/gds_env/master/gds_py/gds_py.yml
+          conda activate gds
           pip install -r https://github.com/darribas/gds_env/raw/master/gds_py/gds_py_pip.txt
 
       - name: Check and Log Environment
@@ -47,7 +42,7 @@ jobs:
           conda info
           # Print conda list
           conda list
-          
+
       - name: Test Blocks
         shell: bash
         continue-on-error: false
